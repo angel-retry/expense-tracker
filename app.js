@@ -1,14 +1,13 @@
 const express = require('express')
-const handlebars = require('express-handlebars')
+const { engine } = require('express-handlebars')
 const app = express()
 const port = 3000
+const router = require('./routes')
 
-app.engine('hbs', handlebars({ extname: '.hbs' }))
+app.engine('hbs', engine({ extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+app.use(router)
 
 app.listen(3000, () => {
   console.log(`Example app is listening on http://localhost:${port}`)

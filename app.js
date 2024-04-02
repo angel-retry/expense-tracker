@@ -1,4 +1,6 @@
 const express = require('express')
+const session = require('express-session')
+const flash = require('connect-flash')
 const { engine } = require('express-handlebars')
 const app = express()
 const port = 3000
@@ -6,6 +8,20 @@ const router = require('./routes')
 
 app.engine('hbs', engine({ extname: '.hbs' }))
 app.set('view engine', 'hbs')
+
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false
+}))
+
+app.use(flash())
+
+app.use((req, res, next) => {
+  res.locals.success_messages = req.flash('success_messages')
+  res.locals.error_messages = req.flash('error_messages')
+  next()
+})
 
 app.use(router)
 

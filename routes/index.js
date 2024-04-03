@@ -2,14 +2,16 @@ const express = require('express')
 const userControllers = require('../controllers/user-controllers')
 const router = express.Router()
 const { generalErrorHandler } = require('../middleware/error-handler')
-const recordControllers = require('../controllers/record-controllers')
 const passport = require('../config/passport')
+const record = require('./modules/record')
+const { authenticate } = require('../middleware/auth')
 
-router.get('/', (req, res) => res.redirect('/records'))
+router.use('/records', authenticate, record)
 
 router.get('/login', userControllers.getLoginPage)
 router.get('/register', userControllers.getRegisterPage)
 router.post('/register', userControllers.register)
+
 router.post('/login', (req, res, next) => {
   const { email, password } = req.body
   if (!email || !password) throw new Error('請輸入帳號密碼!')
@@ -19,10 +21,14 @@ router.post('/login', (req, res, next) => {
   failureFlash: true
 }), userControllers.login)
 
-router.get('/records', recordControllers.getRecords)
 
+
+router.get('/logout', userControllers.logout)
+
+router.use('/', (req, res) => {
+  return res.redirect('/records')
+})
 router.use('/', generalErrorHandler)
-router.use('/', recordControllers.getRecords)
 
 
 module.exports = router

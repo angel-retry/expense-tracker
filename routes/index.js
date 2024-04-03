@@ -5,6 +5,8 @@ const { generalErrorHandler } = require('../middleware/error-handler')
 const recordControllers = require('../controllers/record-controllers')
 const passport = require('../config/passport')
 
+router.get('/', (req, res) => res.redirect('/records'))
+
 router.get('/login', userControllers.getLoginPage)
 router.get('/register', userControllers.getRegisterPage)
 router.post('/register', userControllers.register)
@@ -20,7 +22,7 @@ router.post('/login', (req, res, next) => {
 router.get('/records', recordControllers.getRecords)
 
 router.use('/', generalErrorHandler)
-router.use('/', userControllers.getLoginPage)
+router.use('/', recordControllers.getRecords)
 
 
 module.exports = router

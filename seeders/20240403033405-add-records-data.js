@@ -1,25 +1,18 @@
 'use strict';
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+  async up(queryInterface, Sequelize) {
+    await queryInterface.bulkInsert('Records',
+      Array.from({ length: 20 }).map((_, i) => ({
+        name: `Record -  ${i}`,
+        category: CATEGORY[Math.floor(Math.random() * Object.keys(CATEGORY).length)],
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }))
+    )
   },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('Records', null)
   }
 };

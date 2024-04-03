@@ -1,0 +1,33 @@
+{{> header}}
+{{> message}}
+<div class="d-flex text-center justify-content-center my-5">
+  <p class="fw-bold me-2">總金額</p>
+  <h1 class="fs-1 fw-bold" >23520</h1>
+</div>
+
+<div class="container-fluid container-md p-0">
+  <div class="text-end">
+    <a href="/records/new" class="btn btn-primary col-12 col-sm-2 p-2 mb-3">新增支出</a>
+  </div>
+  <table class="table table-hover table-striped">
+    <tbody>
+      <tr>
+        <th scope="row" class="align-middle text-center">
+          <i class="fa-solid fa-house" style="transform: scale(1.5);"></i>
+        </th>
+        <td class="align-middle">
+          買書
+        </td>
+        <td class="align-middle">
+          2024/4/30
+        </td>
+        <td class="align-middle">60</td>
+        <td class="align-middle text-center">
+          <a href="/records/id" class="btn btn-outline-primary me-2">修改</a>
+          <form action="/records/id" class="btn btn-outline-danger ">刪除</form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

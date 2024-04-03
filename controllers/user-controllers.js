@@ -21,10 +21,14 @@ const userControllers = {
         return User.create({ name, email, password: hash })
       })
       .then(() => {
-        req.flash('success_msg', '註冊成功!')
-        res.redirect('/records')
+        req.flash('success_messages', '註冊成功!')
+        res.redirect('/login')
       })
       .catch(err => next(err))
+  },
+  login: (req, res) => {
+    req.flash('success_messages', '成功登入!')
+    res.redirect('/records')
   }
 }
 

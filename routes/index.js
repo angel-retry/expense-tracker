@@ -21,14 +21,12 @@ router.post('/login', (req, res, next) => {
   failureFlash: true
 }), userControllers.login)
 
-
-
 router.get('/logout', userControllers.logout)
 
 router.use('/', (req, res) => {
   return res.redirect('/records')
 })
-router.use('/', generalErrorHandler)
 
+router.use('/', generalErrorHandler)
 
 module.exports = router

@@ -1,0 +1,28 @@
+<div class="form-row mb-3">
+  <div class="form-row mb-3">
+    <label for="name" class="form-label">名稱</label>
+    <input type="text" id="name" class="form-control" name="name" placeholder="請輸入名稱" value="{{record.name}}" required>
+  </div>
+  <div class="form-row mb-3">
+    <label for="date" class="form-label">時間</label>
+    <input type="date" id="date" class="form-control" name="date"
+      value="{{#if record}}{{record.date}}{{else}}{{today}}{{/if}}" max="{{today}}">
+  </div>
+  <div class="form-row mb-3">
+    <label for="categoryId" class="form-label">類別</label>
+    <select name="categoryId" id="categoryId" class="form-control">
+      <option value="">請選擇類別</option>
+      {{#each categories}}
+      <option value="{{this.id}}" {{#ifCond this.id ../record.categoryId}}selected{{/ifCond}}>{{this.name}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="form-row mb-3">
+    <label for="amount" class="form-label">金額</label>
+    <input type="number" name="amount" id="amount" class="form-control" value="{{record.amount}}"></input>
+  </div>
+  <div class="form-row text-center">
+    <button type="submit" class="btn btn-primary col-md-5 col-12 py-2">
+      {{#if record}}修改{{else}}新增{{/if}}支出
+    </button>
+  </div>

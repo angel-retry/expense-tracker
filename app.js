@@ -8,11 +8,14 @@ const router = require('./routes')
 const passport = require('./config/passport')
 const { getUser } = require('./helpers/auth-helpers')
 const handlebarsHelpers = require('./helpers/handlebars-helpers.js')
+const methodOverride = require('method-override')
 
 app.engine('hbs', engine({ extname: '.hbs', helpers: handlebarsHelpers }))
 app.set('view engine', 'hbs')
 
 app.use(express.urlencoded({ extended: true }))
+
+app.use(methodOverride('_method'))
 
 app.use(session({
   secret: 'secret',

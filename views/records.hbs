@@ -23,9 +23,13 @@
           {{this.date}}
         </td>
         <td class="align-middle">{{this.amount}}</td>
-        <td class="align-middle text-center">
-          <a href="/records/id" class="btn btn-outline-primary me-2">修改</a>
-          <form action="/records/id" class="btn btn-outline-danger ">刪除</form>
+        <td class="align-middle d-flex justify-content-center">
+          <a href="/records/{{this.id}}/edit" class="btn btn-outline-primary me-2">修改</a>
+          <form action="/records/{{this.id}}" method="post">
+          <button type="submit" class="btn btn-outline-danger ">
+            刪除
+          </button>
+          </form>
         </td>
       </tr>
       {{/each}}

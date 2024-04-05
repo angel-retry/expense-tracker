@@ -65,6 +65,21 @@ const recordControllers = {
         return res.redirect('/records')
       })
       .catch(err => next(err))
+  },
+  deleteRecord: (req, res, next) => {
+    const { id } = req.params
+    const userId = req.user.id
+    return Record.findByPk(id)
+      .then(record => {
+        if (!record) throw new Error('沒有此支出!')
+        if (record.toJSON().userId !== userId) throw new Error('你沒有權限刪除此資料!')
+        return record.destroy()
+      })
+      .then(() => {
+        req.flash('success_messages', '成功刪除支出!')
+        return res.redirect('/records')
+      })
+      .catch(err => next(err))
   }
 }
 

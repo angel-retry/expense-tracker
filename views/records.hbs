@@ -25,8 +25,8 @@
         <td class="align-middle">{{this.amount}}</td>
         <td class="align-middle d-flex justify-content-center">
           <a href="/records/{{this.id}}/edit" class="btn btn-outline-primary me-2">修改</a>
-          <form action="/records/{{this.id}}" method="post">
-          <button type="submit" class="btn btn-outline-danger ">
+          <form action="/records/{{this.id}}?_method=DELETE" method="post">
+          <button type="submit" class="btn btn-outline-danger" onclick="return confirm(`你確定要刪除 {{this.name}} 這筆支出嗎?`)">
             刪除
           </button>
           </form>

@@ -5,6 +5,7 @@ const router = express.Router()
 router.get('/new', recordControllers.newRecordPage)
 router.get('/:id/edit', recordControllers.editRecordPage)
 router.put('/:id', recordControllers.putRecord)
+router.delete('/:id', recordControllers.deleteRecord)
 router.get('/', recordControllers.getRecords)
 router.post('/', recordControllers.postRecord)
 

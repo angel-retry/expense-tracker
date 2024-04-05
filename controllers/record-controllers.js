@@ -2,7 +2,18 @@ const { Category, Record } = require('../models')
 
 const recordControllers = {
   getRecords: (req, res, next) => {
-    return res.render('records')
+    const userId = req.user.id
+    Record.findAll({
+      raw: true,
+      where: { userId },
+      include: [Category],
+      nest: true
+    })
+      .then(records => {
+        console.log('records', records)
+        return res.render('records', { records })
+      })
+      .catch(err => next(err))
   },
   newRecordPage: (req, res, next) => {
     Category.findAll({ raw: true })

@@ -11,22 +11,24 @@
   </div>
   <table class="table table-hover table-striped">
     <tbody>
+      {{#each records}}
       <tr>
         <th scope="row" class="align-middle text-center">
-          <i class="fa-solid fa-house" style="transform: scale(1.5);"></i>
+          <i class="{{this.Category.icon}}" style="transform: scale(1.5);"></i>
         </th>
         <td class="align-middle">
-          買書
+          {{this.name}}
         </td>
         <td class="align-middle">
-          2024/4/30
+          {{this.date}}
         </td>
-        <td class="align-middle">60</td>
+        <td class="align-middle">{{this.amount}}</td>
         <td class="align-middle text-center">
           <a href="/records/id" class="btn btn-outline-primary me-2">修改</a>
           <form action="/records/id" class="btn btn-outline-danger ">刪除</form>
         </td>
       </tr>
+      {{/each}}
     </tbody>
   </table>
 

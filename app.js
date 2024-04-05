@@ -7,8 +7,9 @@ const port = 3000
 const router = require('./routes')
 const passport = require('./config/passport')
 const { getUser } = require('./helpers/auth-helpers')
+const handlebarsHelpers = require('./helpers/handlebars-helpers.js')
 
-app.engine('hbs', engine({ extname: '.hbs' }))
+app.engine('hbs', engine({ extname: '.hbs', helpers: handlebarsHelpers }))
 app.set('view engine', 'hbs')
 
 app.use(express.urlencoded({ extended: true }))

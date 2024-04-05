@@ -10,8 +10,9 @@ const recordControllers = {
       nest: true
     })
       .then(records => {
+        const totalAmount = records.reduce((total, record) => total + record.amount, 0)
         console.log('records', records)
-        return res.render('records', { records })
+        return res.render('records', { records, totalAmount })
       })
       .catch(err => next(err))
   },

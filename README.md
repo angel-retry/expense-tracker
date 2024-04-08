@@ -38,7 +38,7 @@ npm run dev
 ```
 6. 接下來會在terminal看到以下內容，代表伺服器建立成功。
 ```
-> restaurant-list@1.0.0 dev
+> expense-tracker@1.0.0 dev
 > nodemon app.js
 
 [nodemon] 2.0.22
@@ -46,7 +46,7 @@ npm run dev
 [nodemon] watching path(s): *.*
 [nodemon] watching extensions: js,mjs,json
 [nodemon] starting `node app.js`
-Example app listening on port 3000
+Example app is listening on http://localhost:3000
 ```
 7.現在，可開啟任一瀏覽器輸入[http://localhost:3000](http://localhost:3000) 開始使用此網站，可使用以下帳號登入。
 ```

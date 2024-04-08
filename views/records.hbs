@@ -1,5 +1,7 @@
 {{> header}}
-{{> message}}
+<div class="container">
+  {{> message}}
+</div>
 <div class="d-flex text-center justify-content-center my-5">
   <p class="fw-bold me-2">總金額</p>
   <h1 class="fs-1 fw-bold" >{{totalAmount}}</h1>
@@ -14,12 +16,45 @@
     <select name="categoryId" id="categoryId" class="form-select" onchange="this.form.submit()">
       <option value="">全部</option>
       {{#each categories}}
-      <option value="{{this.id}}" {{#ifCond this.id ../categoryId}}selected{{/ifCond}}>{{this.name}} {{../categoryId}}</option>
+      <option value="{{this.id}}" {{#ifCond this.id ../categoryId}}selected{{/ifCond}}>{{this.name}}</option>
       {{/each}}
     </select>
     </form>
   </div>
   <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th scope="col" class="text-center">支出類別</th>
+        <th scope="col">名稱</th>
+        <th scope="col">
+          <div class="d-flex">
+            <div class="me-1">日期</div>
+            <div class="position-relative">
+              <a href="/records?sort=dateUp&categoryId={{categoryId}}">
+                <i class="fa-solid fa-caret-up position-absolute top-0 start-0"></i>
+              </a>
+              <a href="/records?sort=dateDown&categoryId={{categoryId}}">
+                <i class="fa-solid fa-caret-down position-absolute top-50 start-0 pe-auto"></i>
+              </a>
+            </div>
+          </div>
+        </th>
+        <th scope="col">
+          <div class="d-flex">
+            <div class="me-1">金額</div>
+            <div class="position-relative">
+              <a href="/records?sort=moneyUp&categoryId={{categoryId}}">
+                <i class="fa-solid fa-caret-up position-absolute top-0 start-0"></i>
+              </a>
+              <a href="/records?sort=moneyDown&categoryId={{categoryId}}">
+                <i class="fa-solid fa-caret-down position-absolute top-50 start-0 pe-auto"></i>
+              </a>
+            </div>
+          </div>
+        </th>
+        <th scope="col" class="text-center">操作</th>
+      </tr>
+    </thead>
     <tbody>
       {{#each records}}
       <tr>

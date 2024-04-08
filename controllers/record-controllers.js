@@ -4,6 +4,22 @@ const recordControllers = {
   getRecords: (req, res, next) => {
     const userId = req.user.id
     const categoryId = Number(req.query.categoryId)
+    let sort = req.query.sort || 'dateUp'
+    switch (sort) {
+      case 'moneyUp':
+        sort = [['amount', 'DESC']]
+        break
+      case 'moneyDown':
+        sort = [['amount', 'ASC']]
+        break
+      case 'dateUp':
+        sort = [['date', 'DESC']]
+        break
+      case 'dateDown':
+        sort = [['date', 'ASC']]
+        break
+    }
+    console.log(sort)
     Promise.all([
       Record.findAll({
         raw: true,
@@ -12,6 +28,7 @@ const recordControllers = {
           ...(categoryId ? { categoryId } : {})
         },
         include: [Category],
+        order: sort,
         nest: true
       }),
       Category.findAll({ raw: true })

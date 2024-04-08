@@ -81,4 +81,25 @@
     </tbody>
   </table>
 
+  <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="/records?page={{pagination.prevPage}}&sort={{sort}}&categoryId={{categoryId}}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      {{#each pagination.pages}}
+      {{#ifCond this ../pagination.currentPage}}
+      <li class="page-item"><a class="page-link active" href="/records?page={{this}}&sort={{../sort}}&categoryId={{../categoryId}}">{{this}}</a></li>
+      {{else}}
+      <li class="page-item"><a class="page-link" href="/records?page={{this}}&sort={{../sort}}&categoryId={{../categoryId}}">{{this}}</a></li>
+      {{/ifCond}}
+      {{/each}}
+      <li class="page-item">
+        <a class="page-link" href="/records?page={{pagination.nextPage}}&sort={{../sort}}&categoryId={{../categoryId}}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>

@@ -1,40 +1,67 @@
-const { Category, Record } = require('../models')
+const { Category, Record, sequelize } = require('../models')
+const { getOffset, getPagination } = require('../helpers/pagination-helpers.js')
 
 const recordControllers = {
   getRecords: (req, res, next) => {
+    const page = Number(req.query.page) || 1
+    const limit = Number(req.query.limit) || 15
+    const offset = getOffset(limit, page)
+
     const userId = req.user.id
     const categoryId = Number(req.query.categoryId)
-    let sort = req.query.sort || 'dateUp'
+
+    const sort = req.query.sort || 'dateUp'
+    let sortOrder = []
     switch (sort) {
       case 'moneyUp':
-        sort = [['amount', 'DESC']]
+        sortOrder = [['amount', 'DESC']]
         break
       case 'moneyDown':
-        sort = [['amount', 'ASC']]
+        sortOrder = [['amount', 'ASC']]
         break
       case 'dateUp':
-        sort = [['date', 'DESC']]
+        sortOrder = [['date', 'DESC']]
         break
       case 'dateDown':
-        sort = [['date', 'ASC']]
+        sortOrder = [['date', 'ASC']]
         break
     }
     Promise.all([
-      Record.findAll({
+      Record.findAndCountAll({
         raw: true,
         where: {
           userId,
           ...(categoryId ? { categoryId } : {})
         },
         include: [Category],
-        order: sort,
-        nest: true
+        order: sortOrder,
+        nest: true,
+        offset,
+        limit
       }),
-      Category.findAll({ raw: true })
+      Category.findAll({ raw: true }),
+      Record.findOne({
+        attributes: [
+          [sequelize.fn('SUM', sequelize.col('amount')), 'totalAmount']
+        ],
+        where: {
+          userId,
+          ...(categoryId ? { categoryId } : {})
+        },
+        raw: true
+      })
     ])
-      .then(([records, categories]) => {
-        const totalAmount = records.reduce((total, record) => total + record.amount, 0)
-        return res.render('records', { records, totalAmount, categories, categoryId })
+      .then(([records, categories, totalAmountResult]) => {
+        return res.render('records',
+          {
+            records: records.rows,
+            totalAmount: totalAmountResult.totalAmount,
+            categories,
+            categoryId,
+            sort,
+            pagination: getPagination(limit, page, records.count)
+          }
+        )
       })
       .catch(err => next(err))
   },

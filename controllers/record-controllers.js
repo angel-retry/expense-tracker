@@ -19,7 +19,6 @@ const recordControllers = {
         sort = [['date', 'ASC']]
         break
     }
-    console.log(sort)
     Promise.all([
       Record.findAll({
         raw: true,

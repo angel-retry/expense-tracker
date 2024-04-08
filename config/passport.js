@@ -28,6 +28,7 @@ passport.deserializeUser((id, cb) => {
   return User.findByPk(id)
     .then(user => {
       user = user.toJSON()
+      delete user.password
       console.log(user)
       return cb(null, user)
     })

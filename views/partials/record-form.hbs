@@ -10,7 +10,7 @@
   </div>
   <div class="form-row mb-3">
     <label for="categoryId" class="form-label">類別</label>
-    <select name="categoryId" id="categoryId" class="form-control">
+    <select name="categoryId" id="categoryId" class="form-select">
       <option value="">請選擇類別</option>
       {{#each categories}}
       <option value="{{this.id}}" {{#ifCond this.id ../record.categoryId}}selected{{/ifCond}}>{{this.name}}</option>

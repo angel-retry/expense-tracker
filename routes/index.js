@@ -27,6 +27,6 @@ router.use('/', (req, res) => {
   return res.redirect('/records')
 })
 
-router.use('/', generalErrorHandler)
+router.use('', generalErrorHandler)
 
 module.exports = router

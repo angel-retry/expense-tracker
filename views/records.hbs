@@ -9,6 +9,16 @@
   <div class="text-end">
     <a href="/records/new" class="btn btn-primary col-12 col-sm-2 p-2 mb-3">新增支出</a>
   </div>
+  <div class="col-md-3 mb-3">
+    <form action="/records" method="get">
+    <select name="categoryId" id="categoryId" class="form-select" onchange="this.form.submit()">
+      <option value="">全部</option>
+      {{#each categories}}
+      <option value="{{this.id}}" {{#ifCond this.id ../categoryId}}selected{{/ifCond}}>{{this.name}} {{../categoryId}}</option>
+      {{/each}}
+    </select>
+    </form>
+  </div>
   <table class="table table-hover table-striped">
     <tbody>
       {{#each records}}

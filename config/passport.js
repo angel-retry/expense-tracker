@@ -29,7 +29,6 @@ passport.deserializeUser((id, cb) => {
     .then(user => {
       user = user.toJSON()
       delete user.password
-      console.log(user)
       return cb(null, user)
     })
     .catch(err => cb(err))

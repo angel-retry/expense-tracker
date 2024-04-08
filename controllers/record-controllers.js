@@ -3,16 +3,22 @@ const { Category, Record } = require('../models')
 const recordControllers = {
   getRecords: (req, res, next) => {
     const userId = req.user.id
-    Record.findAll({
-      raw: true,
-      where: { userId },
-      include: [Category],
-      nest: true
-    })
-      .then(records => {
+    const categoryId = Number(req.query.categoryId)
+    Promise.all([
+      Record.findAll({
+        raw: true,
+        where: {
+          userId,
+          ...(categoryId ? { categoryId } : {})
+        },
+        include: [Category],
+        nest: true
+      }),
+      Category.findAll({ raw: true })
+    ])
+      .then(([records, categories]) => {
         const totalAmount = records.reduce((total, record) => total + record.amount, 0)
-        console.log('records', records)
-        return res.render('records', { records, totalAmount })
+        return res.render('records', { records, totalAmount, categories, categoryId })
       })
       .catch(err => next(err))
   },

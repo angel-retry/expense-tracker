@@ -3,7 +3,7 @@
 
 ## Features - 產品功能
 
-1.使用者可查閱全部的支出開銷費用以及總金額。
+1. 使用者可查閱全部的支出開銷費用以及總金額。
 2. 使用者可新增一筆支出開銷費用。
 3. 使用者可編輯一筆支出開銷費用
 4. 使用者可刪除一筆支出開銷費用。
@@ -24,19 +24,23 @@ git clone https://github.com/angel-retry/expense-tracker
 ```
 cd expense-tracker
 ```
-3. 接下來安裝npm套件，請輸入以下指令開始安裝npm套件。
+3. 新增.env檔，輸入SESSION_SECRET
+```
+SESSION_SECRET=隨意輸入
+```
+4. 接下來安裝npm套件，請輸入以下指令開始安裝npm套件。
 ```
 npm install
 ```
-4. 完成安裝npm套件以後，輸入以下指令，載入種子專案。
+5. 完成安裝npm套件以後，輸入以下指令，載入種子專案。
 ```
 npm run seed
 ```
-5. 載入種子專案完後，輸入以下指令，可啟動專案
+6. 載入種子專案完後，輸入以下指令，可啟動專案
 ```
 npm run dev
 ```
-6. 接下來會在terminal看到以下內容，代表伺服器建立成功。
+7. 接下來會在terminal看到以下內容，代表伺服器建立成功。
 ```
 > expense-tracker@1.0.0 dev
 > nodemon app.js

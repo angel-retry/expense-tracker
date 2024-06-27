@@ -2,6 +2,7 @@ const express = require('express')
 const session = require('express-session')
 const flash = require('connect-flash')
 const { engine } = require('express-handlebars')
+const path = require('path')
 const app = express()
 const port = 3000
 const router = require('./routes')
